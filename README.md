@@ -7,14 +7,14 @@ Anthar-Jala Watch is a smart Android application developed to monitor groundwate
 
 # 📱 Features
 
-- 📍 Live GPS-based borewell logging
-- 🗺 Google Maps integration
-- 🔥 Heatmap visualization for groundwater stress
-- 🟢🟡🔴 Water health indicators (Safe / Moderate / Critical)
-- 📊 Dynamic analytics dashboard
-- 🔔 Groundwater alerts system
-- 📘 Recharge guide with sustainability awareness
-- 🌙 Modern cyber-dark UI using Jetpack Compose
+- 📍 **Live GPS-based borewell logging:** Automatically capture location coordinates.
+- ☁️ **Cloud Storage & Sync:** Real-time data synchronization using **Firebase Realtime Database**.
+- 🗺 **Google Maps integration:** Visualize all community-contributed borewell data on a map.
+- 🔥 **Heatmap visualization:** Identify groundwater stress zones dynamically.
+- 🟢🟡🔴 **Water health indicators:** Instant status (Safe / Moderate / Critical) based on borewell depth.
+- 📊 **Dynamic analytics dashboard:** Real-time metrics of community groundwater health.
+- 📘 **Recharge guide:** Sustainability awareness and educational methods.
+- 🌙 **Modern UI:** Built with Jetpack Compose following Material 3 design principles with a cyber-dark theme.
 
 ---
 
@@ -22,19 +22,7 @@ Anthar-Jala Watch is a smart Android application developed to monitor groundwate
 
 Groundwater levels are rapidly decreasing in many urban and rural areas. Most people realize borewell failure only after severe water scarcity occurs. There is currently no community-based platform to collectively monitor groundwater health or visualize water-stress regions.
 
-Anthar-Jala Watch addresses this challenge by enabling users to crowdsource borewell data and generate a dynamic groundwater monitoring system.
-
----
-
-# 🧠 Solution Overview
-
-The application allows users to:
-1. Enter borewell details such as depth, yield, soil type, and year.
-2. Automatically capture GPS location using live location services.
-3. Visualize groundwater health on Google Maps using colored markers and heatmaps.
-4. Analyze safe, moderate, and critical groundwater zones.
-5. Receive alerts for critical groundwater conditions.
-6. Learn groundwater recharge methods through educational guides.
+Anthar-Jala Watch addresses this challenge by enabling users to crowdsource borewell data and generate a dynamic, cloud-backed groundwater monitoring system.
 
 ---
 
@@ -44,9 +32,8 @@ The application allows users to:
 |---|---|
 | Kotlin | Android App Development |
 | Jetpack Compose | UI Development |
-| Android Studio | IDE |
+| **Firebase Realtime DB** | **Cloud Data Storage & Real-time Sync** |
 | Google Maps API | Interactive Maps |
-| Google Maps Compose | Compose Maps Integration |
 | Android Maps Utils | Heatmap Visualization |
 | GPS Location Services | Live Location Tracking |
 | Material 3 | UI Components |
@@ -58,23 +45,20 @@ The application allows users to:
 ```bash
 AntharJala/
 │
-├── ui/
-│   ├── screens/
+├── app/src/main/java/com/example/antharjala/
+│   ├── ui/theme/screens/
 │   │   ├── HomeScreen.kt
-│   │   ├── AddBorewellScreen.kt
+│   │   ├── AddBorewellScreen.kt (Cloud Connected)
 │   │   ├── MapScreen.kt
 │   │   ├── HeatMapScreen.kt
-│   │   ├── AnalyticsScreen.kt
-│   │   ├── AlertsScreen.kt
-│   │   └── RechargeGuideScreen.kt
+│   │   └── BorewellRepository.kt (Firebase Integration Logic)
 │
-├── data/
-│   ├── BorewellData.kt
-│   └── BorewellRepository.kt
+├── data/ (Models)
+│   └── BorewellData.kt
 │
 ├── MainActivity.kt
 └── AndroidManifest.xml
-
+```
 
 📊 Water Health Logic
 | Depth Level  | Status   | Indicator |
@@ -83,140 +67,57 @@ AntharJala/
 | 200–300 ft   | Moderate | 🟡 Yellow |
 | Above 300 ft | Critical | 🔴 Red    |
 
+---
 
-🔥 Heatmap Feature
-
-The application dynamically updates groundwater heat intensity based on user-entered borewell data. Areas with severe groundwater stress appear as high-intensity regions on the map.
-
-🔒 Privacy & Data Accuracy
-Live GPS integration improves data accuracy.
-Exact house numbers and sensitive personal information are hidden.
-Community-level visualization ensures privacy protection
-
-
-# ▶️ How to Run the Anthar-Jala Watch App
+# ▶️ How to Run the App
 
 ## 📌 Prerequisites
 
-- Android Studio installed
-- Android SDK API 26 or above
-- Kotlin support enabled
-- Google Maps API key
-- Android phone or emulator
+- Android Studio installed.
+- Google Maps API key.
+- **Firebase Project Setup:**
+  - Project ID: `anthar-jala-watch-7c616`
+  - Database URL: `https://anthar-jala-watch-7c616-default-rtdb.firebaseio.com/`
+  - `google-services.json` file.
 
 ---
 
-# 🚀 Step 1 — Open the Project
+# 🚀 Step 1 — Firebase & Maps Configuration
 
-1. Open Android Studio
-2. Click **Open**
-3. Select the **AntharJala Project Folder**
-4. Wait for Gradle Sync to complete
+### 1. Firebase Setup
+1. Go to the [Firebase Console](https://console.firebase.google.com/project/anthar-jala-watch-7c616/overview).
+2. Download the `google-services.json` file.
+3. Place it in the `app/` directory of the project.
+4. Ensure **Realtime Database** is enabled in the Firebase Console.
+5. **Rules:** Set database rules to allow read/write access (for development):
+```json
+{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+```
 
----
-
-# 🚀 Step 2 — Add Google Maps API Key
-
-Open:
-
+### 2. Google Maps API Key
+Open `AndroidManifest.xml` and add your actual Google Maps key:
 ```xml
-AndroidManifest.xml
-
-Add the following inside the <application> tag:
-
 <meta-data
     android:name="com.google.android.geo.API_KEY"
     android:value="YOUR_API_KEY"/>
+```
 
-Replace:
+---
 
-YOUR_API_KEY
+# 🚀 Step 2 — Sync and Run
 
-with your actual Google Maps API key.
+1. **File → Sync Project with Gradle Files** in Android Studio.
+2. Select your device/emulator.
+3. Click **▶ Run**.
 
-🚀 Step 3 — Enable Required APIs
+🔥 Features to Test (Cloud Sync)
+- **Add Borewell Data:** Enter details and click **Save**. Data will sync instantly to the [Firebase Data Console](https://console.firebase.google.com/project/anthar-jala-watch-7c616/database/anthar-jala-watch-7c616-default-rtdb/data/~2F).
+- **Verify Cloud Sync:** Check the console to see the entries appearing in real-time.
+- **Real-time Map:** Observe how data added by one user immediately becomes visible to all users.
 
-Enable the following APIs in Google Cloud Console:
-
-Maps SDK for Android
-Places API (Optional)
-🚀 Step 4 — Sync the Project
-
-In Android Studio:
-
-File → Sync Project with Gradle Files
-
-Wait until:
-
-BUILD SUCCESSFUL
-
-appears.
-
-🚀 Step 5 — Connect Android Device
-Option 1 — Real Android Phone (Recommended)
-Enable Developer Options
-Enable USB Debugging
-Connect phone using USB cable
-Allow USB Debugging permission
-Option 2 — Android Emulator
-Open Device Manager
-Create Virtual Device
-Select API 26 or above
-Start emulator
-Set emulator GPS location manually if needed
-🚀 Step 6 — Run the Application
-Select connected device/emulator
-Click:
-▶ Run
-
-Wait for application to install and launch.
-
-📍 GPS Configuration
-
-If latitude and longitude show:
-
-0.0 | 0.0
-
-then:
-Enable device location
-Allow precise location permission
-Restart application
-
-For emulator:
-Extended Controls → Location → Set Location
-🔥 Features to Test
-Add Borewell Data
-Open Water Map
-View Heatmap
-Check Analytics
-View Alerts
-Open Recharge Guide
-🧪 Sample Test Data
-Field	Sample Value
-Depth	350
-Yield	1200
-Soil Type	Red Soil
-Year	2020
-Area	Bangalore
-📦 Build APK
-
-To generate APK:
-Build → Build APK(s)
-
-APK Location:
-app/build/outputs/apk/debug/app-debug.apk
-⚠ Common Issues & Solutions
-Issue	Solution
-Google Maps blank	Check API key
-GPS showing 0.0	Enable location services
-Markers not visible	Save new entries after GPS works
-Emulator lag	Use real Android phone
-Text not visible	Apply custom text colors
-✅ Application Running Successfully
-
-The application will now:
-Capture live GPS location
-Save borewell data
-Display map markers
-Generate groundwater analytics
-Show alerts and heatmap visualization
+✅ **Application successfully migrated to Firebase Cloud for centralized storage.**

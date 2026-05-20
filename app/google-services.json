@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "416257779901",
+    "firebase_url": "https://anthar-jala-watch-7c616-default-rtdb.firebaseio.com",
+    "project_id": "anthar-jala-watch-7c616",
+    "storage_bucket": "anthar-jala-watch-7c616.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416257779901:android:82d20263a28ea46c5b6fd4",
+        "android_client_info": {
+          "package_name": "com.example.antharjala"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMWo1XJyRLTEVdwylOvq8S7MiHeczgots"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416257779901:android:1a0a50cb9a88f1a05b6fd4",
+        "android_client_info": {
+          "package_name": "com.example.antharjala"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMWo1XJyRLTEVdwylOvq8S7MiHeczgots"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
